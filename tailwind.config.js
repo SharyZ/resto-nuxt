@@ -1,3 +1,5 @@
+const colors = require("tailwindcss/colors");
+
 module.exports = {
   content: [
     "./components/**/*.{js,vue,ts}",
@@ -10,6 +12,9 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ["DM Sans", "sans-serif"],
+      },
+      colors: {
+        primary: colors.emerald,
       },
     },
     container: {
