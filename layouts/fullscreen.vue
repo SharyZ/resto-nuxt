@@ -4,4 +4,8 @@
   </div>
 </template>
 
-<style></style>
+<style>
+.fullscreen {
+  @apply flex min-h-screen w-full items-center justify-center;
+}
+</style>
