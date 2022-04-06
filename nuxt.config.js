@@ -39,11 +39,14 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     // https://go.nuxtjs.dev/axios
+    "@nuxtjs/auth-next",
     "@nuxtjs/axios",
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios: {
+    baseURL: process.env.BASE_URL || "http://localhost:8000/api/v1",
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
@@ -51,6 +54,35 @@ export default {
       plugins: {
         tailwindcss: {},
         autoprefixer: {},
+      },
+    },
+  },
+
+  auth: {
+    redirect: {
+      login: "/login",
+      logout: "/login",
+      home: "/",
+    },
+    strategies: {
+      local: {
+        token: {
+          name: "Authorization",
+          type: "Token",
+        },
+        user: {
+          property: false,
+          autoFetch: true,
+        },
+        endpoints: {
+          login: {
+            url: "token/login/",
+            method: "post",
+            property: "data.auth_token",
+          },
+          logout: { url: "token/logout/", method: "post" },
+          user: { url: "users/me/", method: "get", property: false },
+        },
       },
     },
   },

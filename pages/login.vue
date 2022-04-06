@@ -4,16 +4,17 @@
       <div class="mb-6">
         <h1>Login<span class="text-primary-500">.</span></h1>
       </div>
-      <form>
+      <form @submit.prevent="userLogin">
         <div class="grid grid-rows-3 gap-4 sm:grid-cols-2">
           <div class="col-span-2 mb-2">
-            <label for="email">Email</label>
+            <label for="username">Username</label>
             <input
-              type="email"
-              id="email"
-              name="email"
-              placeholder="john_doe@example.com"
+              type="text"
+              id="username"
+              name="username"
+              placeholder="john___doe"
               required
+              v-model="loginData.username"
             />
           </div>
           <div class="col-span-2 mb-2">
@@ -24,6 +25,7 @@
               name="password"
               placeholder="password"
               required
+              v-model="loginData.password"
             />
           </div>
           <div class="col-span-2 mb-2 text-center">
@@ -43,5 +45,38 @@
 <script>
 export default {
   layout: "fullscreen",
+  data() {
+    return {
+      loginData: {
+        username: "",
+        password: "",
+      },
+    };
+  },
+  methods: {
+    async userLogin() {
+      const { username, password } = this.loginData;
+
+      try {
+        let response = await this.$auth.loginWith("local", {
+          data: {
+            username,
+            password,
+          },
+        });
+        const token = response.data.auth_token;
+
+        console.log(response);
+
+        this.$auth.setUserToken(token);
+
+        console.log(this.$auth);
+
+        this.$router.push("/");
+      } catch (error) {
+        console.error(error);
+      }
+    },
+  },
 };
 </script>

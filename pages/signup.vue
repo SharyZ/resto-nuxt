@@ -4,7 +4,7 @@
       <div class="mb-6">
         <h1>Signup<span class="text-primary-500">.</span></h1>
       </div>
-      <form>
+      <form @submit.prevent="userSignup">
         <div class="grid grid-rows-3 gap-4 sm:grid-cols-2">
           <div class="mb-2">
             <label for="firstname">Firstname</label>
@@ -14,6 +14,7 @@
               name="firstname"
               placeholder="John"
               required
+              v-model="signupData.first_name"
             />
           </div>
           <div class="mb-2">
@@ -24,6 +25,18 @@
               name="lastname"
               placeholder="Doe"
               required
+              v-model="signupData.last_name"
+            />
+          </div>
+          <div class="col-span-2 mb-2">
+            <label for="username">Username</label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              placeholder="john_doe"
+              required
+              v-model="signupData.username"
             />
           </div>
           <div class="col-span-2 mb-2">
@@ -34,6 +47,7 @@
               name="email"
               placeholder="john_doe@example.com"
               required
+              v-model="signupData.email"
             />
           </div>
           <div class="col-span-2 mb-2">
@@ -44,6 +58,7 @@
               name="password"
               placeholder="password"
               required
+              v-model="signupData.password"
             />
           </div>
           <div class="col-span-2 mb-2">
@@ -78,5 +93,44 @@
 <script>
 export default {
   layout: "fullscreen",
+  data() {
+    return {
+      signupData: {
+        firt_name: "",
+        last_name: "",
+        username: "",
+        email: "",
+        password: "",
+        error: null,
+      },
+    };
+  },
+  methods: {
+    async userSignup() {
+      const { first_name, last_name, username, email, password } =
+        this.signupData;
+
+      try {
+        await this.$axios.post("users/", {
+          first_name,
+          last_name,
+          username,
+          email,
+          password,
+        });
+
+        await this.$auth.loginWith("local", {
+          data: {
+            username,
+            password,
+          },
+        });
+
+        this.$router.push("/");
+      } catch (error) {
+        this.error = error.response.data.message;
+      }
+    },
+  },
 };
 </script>
