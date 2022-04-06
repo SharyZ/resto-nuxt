@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="store">
     <div v-if="$auth.loggedIn">
       <h1>{{ $auth.user.email }}</h1>
       <button @click="logout">logout</button>

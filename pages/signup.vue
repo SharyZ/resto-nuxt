@@ -93,6 +93,7 @@
 <script>
 export default {
   layout: "fullscreen",
+  middleware: "isAuthenticated",
   data() {
     return {
       signupData: {

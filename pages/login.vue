@@ -45,6 +45,7 @@
 <script>
 export default {
   layout: "fullscreen",
+  middleware: "isAuthenticated",
   data() {
     return {
       loginData: {
@@ -66,13 +67,9 @@ export default {
         });
         const token = response.data.auth_token;
 
-        console.log(response);
-
         this.$auth.setUserToken(token);
 
-        console.log(this.$auth);
-
-        this.$router.push("/");
+        // this.$router.push("/");
       } catch (error) {
         console.error(error);
       }

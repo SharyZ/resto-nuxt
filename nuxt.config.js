@@ -60,9 +60,8 @@ export default {
 
   auth: {
     redirect: {
-      login: "/login",
+      // login: "/store",
       logout: "/login",
-      home: "/",
     },
     strategies: {
       local: {
@@ -80,7 +79,7 @@ export default {
             method: "post",
             property: "data.auth_token",
           },
-          logout: { url: "token/logout/", method: "post" },
+          logout: false,
           user: { url: "users/me/", method: "get", property: false },
         },
       },
