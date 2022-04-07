@@ -21,6 +21,10 @@ export default {
         type: "text/css",
         href: "https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap",
       },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/icon?family=Material+Icons",
+      },
     ],
   },
 
