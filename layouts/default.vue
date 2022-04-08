@@ -1,11 +1,9 @@
 <template>
   <div>
     <TheHeader />
-    <main>
+    <main class="container py-10">
       <Nuxt />
     </main>
     <TheFooter />
   </div>
 </template>
-
-<style></style>
