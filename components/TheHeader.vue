@@ -50,7 +50,7 @@
                 9+
               </span>
             </NuxtLink>
-            <button id="menu-btn" class="lg:hidden">
+            <button id="menu-btn" class="lg:hidden" @click="toggleMenu">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="h-6 w-6"
@@ -70,14 +70,14 @@
         </div>
         <ul
           v-if="categories.length"
-          class="hidden p-2 lg:flex lg:items-center lg:space-x-6"
+          :class="menuIsOpen ? 'block' : 'hidden'"
+          class="flex-col space-y-2 p-2 lg:flex lg:flex-row lg:items-center lg:space-y-0 lg:space-x-6"
           id="menu"
         >
           <li v-for="category in categories" :key="category.slug">
             <NuxtLink
               :to="'/category/' + category.slug"
-              class="text-slate-200"
-              active-class="text-primary-500"
+              class="block rounded-lg px-2 py-1 text-slate-200 hover:bg-slate-600 hover:text-slate-50 lg:mt-0"
             >
               {{ category.name }}
             </NuxtLink>
@@ -127,6 +127,11 @@
 
 <script>
 export default {
+  data() {
+    return {
+      menuIsOpen: false,
+    };
+  },
   async mounted() {
     await this.$axios.$get("categories/").then((response) => {
       this.$store.commit("category/setCategoriesList", response);
@@ -135,6 +140,9 @@ export default {
   methods: {
     async logout() {
       await this.$auth.logout();
+    },
+    toggleMenu() {
+      this.menuIsOpen = !this.menuIsOpen;
     },
   },
   computed: {
