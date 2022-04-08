@@ -1,11 +1,11 @@
 <template>
-  <div class="home">
+  <div class="products">
     <div class="py-5">
-      <h1>Last products</h1>
+      <h1>Available products</h1>
     </div>
     <ul class="products-grid">
       <li
-        v-for="product in lastFourProducts"
+        v-for="product in products"
         :key="product.id"
         class="rounded-lg p-5 transition hover:bg-slate-600"
       >
@@ -27,16 +27,11 @@
         </NuxtLink>
       </li>
     </ul>
-    <div class="my-10 flex justify-center">
-      <NuxtLink to="/products" class="btn btn-primary">
-        See all products
-      </NuxtLink>
-    </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapState } from "vuex";
 
 export default {
   middleware: ["auth"],
@@ -47,7 +42,9 @@ export default {
     });
   },
   computed: {
-    ...mapGetters("products", ["lastFourProducts"]),
+    ...mapState({
+      products: (state) => state.products.productsList,
+    }),
   },
   methods: {
     addToCart(productId) {
