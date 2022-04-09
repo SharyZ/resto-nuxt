@@ -126,6 +126,8 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
   data() {
     return {
@@ -133,9 +135,7 @@ export default {
     };
   },
   async mounted() {
-    await this.$axios.$get("categories/").then((response) => {
-      this.$store.commit("category/setCategoriesList", response);
-    });
+    await this.$store.dispatch("category/getCategoriesList");
   },
   methods: {
     async logout() {
@@ -146,9 +146,9 @@ export default {
     },
   },
   computed: {
-    categories() {
-      return this.$store.state.category.categoryList;
-    },
+    ...mapState({
+      categories: (state) => state.category.categoriesList,
+    }),
   },
 };
 </script>

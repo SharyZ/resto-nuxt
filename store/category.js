@@ -1,9 +1,17 @@
 export const state = () => ({
-  categoryList: [],
+  categoriesList: [],
 });
 
 export const mutations = {
-  setCategoriesList(state, list) {
-    state.categoryList = list;
+  setCategoriesList(state, categories) {
+    state.categoriesList = categories;
+  },
+};
+
+export const actions = {
+  async getCategoriesList({ commit }) {
+    const categoriesList = await this.$axios.$get(`categories/`);
+
+    commit("setCategoriesList", categoriesList);
   },
 };
