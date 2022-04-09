@@ -23,6 +23,8 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
   middleware: ["auth"],
   async asyncData({ params }) {
@@ -30,14 +32,12 @@ export default {
     return { id };
   },
   async mounted() {
-    await this.$axios.$get(`products/${this.id}`).then((response) => {
-      this.$store.commit("products/setProduct", response);
-    });
+    await this.$store.dispatch("products/getProductById", this.id);
   },
   computed: {
-    product() {
-      return this.$store.state.products.product;
-    },
+    ...mapState({
+      product: (state) => state.products.product,
+    }),
   },
   methods: {
     addToCart(productId) {

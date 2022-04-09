@@ -36,10 +36,7 @@ import { mapState } from "vuex";
 export default {
   middleware: ["auth"],
   async mounted() {
-    await this.$axios.$get("products/").then((response) => {
-      const { results } = response;
-      this.$store.commit("products/setProductsList", results);
-    });
+    await this.$store.dispatch("products/getProductsList");
   },
   computed: {
     ...mapState({
