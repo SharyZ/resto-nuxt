@@ -5,7 +5,7 @@
     </div>
     <ul class="products-grid">
       <li
-        v-for="product in lastFourProducts"
+        v-for="product in lastProducts"
         :key="product.id"
         class="rounded-lg p-5 transition hover:bg-slate-600"
       >
@@ -36,18 +36,17 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapState } from "vuex";
 
 export default {
   middleware: ["auth"],
   async mounted() {
-    await this.$axios.$get("products/").then((response) => {
-      const { results } = response;
-      this.$store.commit("products/setProductsList", results);
-    });
+    await this.$store.dispatch("getLastProducts");
   },
   computed: {
-    ...mapGetters("products", ["lastFourProducts"]),
+    ...mapState({
+      lastProducts: (state) => state.lastProducts,
+    }),
   },
   methods: {
     addToCart(productId) {

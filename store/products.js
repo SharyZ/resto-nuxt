@@ -11,9 +11,3 @@ export const mutations = {
     state.product = product;
   },
 };
-
-export const getters = {
-  lastFourProducts(state) {
-    return state.productsList.slice(0, 4);
-  },
-};
