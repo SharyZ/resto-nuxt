@@ -20,7 +20,7 @@
           <div v-html="product.small_description" class="py-2"></div>
           <div class="flex items-center justify-between">
             <h3>{{ product.price }} UZS</h3>
-            <button @click.prevent="addToCart(product.id)">Add to Cart</button>
+            <button @click.prevent="addToCart(product)">Add to Cart</button>
           </div>
         </NuxtLink>
       </li>
@@ -47,8 +47,12 @@ export default {
     }),
   },
   methods: {
-    addToCart(productId) {
-      alert(`${productId} added to cart`);
+    addToCart(product) {
+      const item = {
+        ...product,
+        quantity: 1,
+      };
+      this.$store.commit("cart/addToCart", item);
     },
   },
 };
