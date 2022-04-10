@@ -10,7 +10,7 @@
         class="rounded-lg p-5 transition hover:bg-slate-600"
       >
         <NuxtLink
-          :to="`products/${product.id}`"
+          :to="`/products/${product.id}`"
           class="text-center text-slate-200 hover:text-slate-200"
         >
           <figure class="mb-4">

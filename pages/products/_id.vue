@@ -13,7 +13,7 @@
           <h3 class="text-2xl">
             Price: <span class="text-primary-500">{{ product.price }} UZS</span>
           </h3>
-          <h4>Category: {{ product.category }}</h4>
+          <h4>Category: {{ product.category.name }}</h4>
           <div v-html="product.small_description"></div>
           <button @click="addToCart(product.id)">Add to Cart</button>
         </div>
