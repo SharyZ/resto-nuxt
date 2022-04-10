@@ -1,6 +1,9 @@
 <template>
   <div>
     <div class="mx-auto mt-10 max-w-4xl rounded-lg bg-slate-600 p-10">
+      <div v-if="productLoading">
+        <p>Loading...</p>
+      </div>
       <div class="flex flex-col items-center justify-around lg:flex-row">
         <img
           :src="product.image"
@@ -37,6 +40,7 @@ export default {
   computed: {
     ...mapState({
       product: (state) => state.products.product,
+      productLoading: (state) => state.products.productLoading,
     }),
   },
   methods: {

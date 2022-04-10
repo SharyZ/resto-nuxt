@@ -1,6 +1,18 @@
 export const state = () => ({
   productsList: [],
-  product: {},
+  product: {
+    id: 0,
+    name: "",
+    image: "",
+    small_description: "",
+    price: 0,
+    category: {
+      id: 0,
+      name: "",
+      slug: "",
+    },
+  },
+  productLoading: true,
 });
 
 export const mutations = {
@@ -9,6 +21,9 @@ export const mutations = {
   },
   setProduct(state, product) {
     state.product = product;
+  },
+  setProductLoading(state, loading) {
+    state.productLoading = loading;
   },
 };
 
@@ -20,8 +35,11 @@ export const actions = {
   },
 
   async getProductById({ commit }, productId) {
-    const product = await this.$axios.$get(`products/${productId}`);
-
-    commit("setProduct", product);
+    const product = await this.$axios
+      .$get(`products/${productId}`)
+      .then((response) => {
+        commit("setProduct", response);
+        commit("setProductLoading", false);
+      });
   },
 };
