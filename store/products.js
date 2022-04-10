@@ -21,7 +21,7 @@ export const actions = {
 
   async getProductById({ commit }, productId) {
     const product = await this.$axios.$get(`products/${productId}`);
-    console.log(product);
+
     commit("setProduct", product);
   },
 };
