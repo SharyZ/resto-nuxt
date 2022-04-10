@@ -63,3 +63,9 @@
     @apply bg-transparent text-slate-200;
   }
 }
+
+@layer components {
+  .products-grid {
+    @apply grid grid-cols-4 gap-5;
+  }
+}

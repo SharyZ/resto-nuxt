@@ -50,9 +50,3 @@ export default {
   },
 };
 </script>
-
-<style>
-.products-grid {
-  @apply grid grid-cols-4 gap-5;
-}
-</style>
