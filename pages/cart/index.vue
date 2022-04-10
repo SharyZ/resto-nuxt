@@ -39,6 +39,7 @@
                         {{ item.quantity }}
                       </span>
                       <button
+                        @click="addToCart(item)"
                         class="rounded-full bg-primary-500 px-3 py-1 font-medium text-white"
                       >
                         +
@@ -72,6 +73,15 @@ export default {
     ...mapState({
       cartItems: (state) => state.cart.items,
     }),
+  },
+  methods: {
+    addToCart(product) {
+      const item = {
+        ...product,
+        quantity: 1,
+      };
+      this.$store.commit("cart/addToCart", item);
+    },
   },
 };
 </script>

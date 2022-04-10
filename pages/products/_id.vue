@@ -28,7 +28,7 @@
               v-model="quantity"
               class="w-16"
             />
-            <button @click="addToCart(product.id)">Add to Cart</button>
+            <button @click="addToCart">Add to Cart</button>
           </div>
         </div>
       </div>
