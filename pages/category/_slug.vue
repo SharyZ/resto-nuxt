@@ -32,7 +32,7 @@
 import { mapState } from "vuex";
 
 export default {
-  middleware: ["auth"],
+  middleware: ["auth", "initializeLocaleCart"],
   data() {
     return {
       slug: this.$route.params.slug,

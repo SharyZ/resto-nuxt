@@ -35,7 +35,8 @@
 
   [type="text"],
   [type="email"],
-  [type="password"] {
+  [type="password"],
+  [type="number"] {
     @apply w-full rounded-lg border-none bg-slate-700 placeholder:text-slate-300 focus:border-primary-500 focus:ring-primary-500;
   }
 
@@ -67,5 +68,32 @@
 @layer components {
   .products-grid {
     @apply grid grid-cols-4 gap-5;
+  }
+
+  .cart-table {
+    @apply min-w-full table-fixed bg-slate-600;
+  }
+
+  .cart-table thead {
+    @apply border-b border-primary-500 bg-slate-900;
+  }
+  .cart-table thead tr {
+    @apply hover:bg-slate-900;
+  }
+
+  .cart-table th {
+    @apply py-3 px-6 text-center text-xs font-medium uppercase tracking-wider;
+  }
+
+  .cart-table tbody {
+    @apply divide-y divide-primary-200;
+  }
+
+  .cart-table tr {
+    @apply text-center transition hover:bg-slate-800;
+  }
+
+  .cart-table td {
+    @apply w-4 p-4;
   }
 }

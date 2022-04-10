@@ -14,7 +14,7 @@
                 <span
                   class="absolute -top-2 -right-2 rounded-full bg-white px-1 text-sm font-bold text-primary-500"
                 >
-                  9+
+                  {{ cartLength }}
                 </span>
               </NuxtLink>
               <div class="group relative">
@@ -47,7 +47,7 @@
               <span
                 class="absolute -top-2 -right-2 rounded-full bg-white px-1 text-sm font-bold text-primary-500"
               >
-                9+
+                {{ cartLength }}
               </span>
             </NuxtLink>
             <button id="menu-btn" class="lg:hidden" @click="toggleMenu">
@@ -92,7 +92,7 @@
             <span
               class="absolute -top-2 -right-2 rounded-full bg-white px-1 text-sm font-bold text-primary-500"
             >
-              9+
+              {{ cartLength }}
             </span>
           </NuxtLink>
           <div class="group relative">
@@ -126,7 +126,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapGetters } from "vuex";
 
 export default {
   data() {
@@ -148,6 +148,9 @@ export default {
   computed: {
     ...mapState({
       categories: (state) => state.category.categoriesList,
+    }),
+    ...mapGetters({
+      cartLength: "cart/cartLength",
     }),
   },
 };

@@ -34,7 +34,7 @@
 import { mapState } from "vuex";
 
 export default {
-  middleware: ["auth"],
+  middleware: ["auth", "initializeLocaleCart"],
   async mounted() {
     await this.$store.dispatch("products/getProductsList");
   },

@@ -18,7 +18,18 @@
           </h3>
           <h4>Category: {{ product.category.name }}</h4>
           <div v-html="product.small_description"></div>
-          <button @click="addToCart(product.id)">Add to Cart</button>
+          <div class="flex space-x-2">
+            <input
+              type="number"
+              min="1"
+              max="10"
+              placeholder="1"
+              required
+              v-model="quantity"
+              class="w-16"
+            />
+            <button @click="addToCart(product.id)">Add to Cart</button>
+          </div>
         </div>
       </div>
     </div>
@@ -29,7 +40,12 @@
 import { mapState } from "vuex";
 
 export default {
-  middleware: ["auth"],
+  middleware: ["auth", "initializeLocaleCart"],
+  data() {
+    return {
+      quantity: 1,
+    };
+  },
   async asyncData({ params }) {
     const id = params.id;
     return { id };
@@ -44,8 +60,12 @@ export default {
     }),
   },
   methods: {
-    addToCart(productId) {
-      alert(`${productId} added to cart`);
+    addToCart() {
+      const item = {
+        ...this.product,
+        quantity: this.quantity,
+      };
+      this.$store.commit("cart/addToCart", item);
     },
   },
 };
