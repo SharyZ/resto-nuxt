@@ -19,7 +19,10 @@
               {{ product.name }}
             </figcaption>
           </figure>
-          <div v-html="product.small_description" class="py-2"></div>
+          <div
+            v-html="product.small_description"
+            class="mb-4 line-clamp-2"
+          ></div>
           <div class="flex items-center justify-between">
             <h3>{{ product.price }} UZS</h3>
             <button @click.prevent="addToCart(product)">Add to Cart</button>
